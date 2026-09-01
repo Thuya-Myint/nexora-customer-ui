@@ -11,7 +11,7 @@ import { carouselItems } from '../constants/carousel'
 
 const Carousel = () => {
   return (
-    <div className='p-10 relative'>
+    <div >
       <Swiper
         modules={[Navigation, Pagination, A11y, Autoplay]}
         spaceBetween={0}
@@ -19,25 +19,23 @@ const Carousel = () => {
         navigation
         autoplay={{ delay: 3000 }}
         loop
-        pagination={{ clickable: true }}
+      // pagination={{ clickable: true }}
       >
-
         {
           carouselItems.map((item, index) => (
             <SwiperSlide
               key={index}
               className=' '>
-              <div className='flex justify-center '>
-
-                <div className='w-100 h-40 relative cursor-pointer'>
-                  <div className='bg-black/30 absolute  z-50 w-full h-full flex flex-col gap-2 justify-center items-center text-white'>
-                    <h1 className='text-2xl'>{item.title}</h1>
+              <div className='flex justify-center items-center bg-primary p-4 text-white'>
+                <div className=' cursor-pointer'>
+                  <h1 className='text-2xl'>{item.title}</h1>
+                  <div className='flex gap-2 items-center'>
                     <div>{item.description}</div>
-                    <Link to={item.quickLink} className="bg-primary p-1 rounded-lg text-sm">
+                    <Link to={item.quickLink} className="bg-white p-1 text-primary rounded-lg text-sm">
                       {"detail >>>"}
                     </Link>
                   </div>
-                  <img src={item.photoUrl} className='' />
+
                 </div>
 
               </div>

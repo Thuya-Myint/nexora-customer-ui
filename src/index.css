@@ -1,25 +1,21 @@
 @import "tailwindcss";
 
+*{
+  user-select: none;
+  -webkit-user-select:none;
+  -webkit-user-drag: none;
+}
 @theme{
   --color-primary:#8519ee;
   --color-secondary:#c3c3c3;
-  --color-footer:#0d0d14
+  --color-footer:#0e0d15
 }
 .swiper-button-next, .swiper-button-prev{
   width: 36px !important;
   height: 36px !important;
-  color: #8519ee !important;
+  color: #fff !important;
   background-color: rgba(224, 221, 221, 0.634);
   padding: 8px;
   border-radius: 10px;
 }
-.swiper-pagination-bullet{
-  background-color: #8519ee !important;
-  opacity: 0.6 !important;
-}
-.swiper-pagination-bullet-active{
-  background-color: #8519ee !important;
-  opacity: 1 !important;
-}
-
 

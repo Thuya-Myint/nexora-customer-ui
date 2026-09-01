@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import logo from '../assets/logo/logo.png'
 import { navItems } from '../constants/navitem'
 import { IoIosSearch, IoMdCart } from "react-icons/io";
@@ -50,9 +50,12 @@ const Navbar = () => {
           <div className='lg:flex hidden items-center gap-4'>
             {
               navItems.map((value, index) => (
-                <div key={`${value.path} + ${index}`}>
+                <NavLink to={value.path} key={`${value.path} + ${index}`}
+                  className={({ isActive }) => `${isActive ? "bg-primary/20" : ""} p-2 rounded-xl`
+                  }
+                >
                   {value.title}
-                </div>
+                </NavLink>
               ))
             }
             <IoMdCart
@@ -115,12 +118,12 @@ const Navbar = () => {
         <div className='lg:hidden flex flex-col items-center gap-4 w-full mt-4'>
           {
             navItems.map((value, index) => (
-              <Link key={`${value.path} + ${index}`}
+              <NavLink key={`${value.path} + ${index}`}
                 to={value.path}
                 onClick={() => setIsHamburgerMenuOpen(!isHamburgerMenuOpen)}
-                className={`w-full  transition-all  ${isHamburgerMenuOpen ? " opacity-100 duration-1000" : " opacity-0 duration-100"}   p-2 rounded-xl   ${value.path === "/product" ? "bg-primary/30" : ""}`}>
+                className={({ isActive }) => `w-full  transition-all   ${isHamburgerMenuOpen ? " opacity-100 duration-1000" : " opacity-0 duration-100"}   p-2 rounded-xl   ${isActive ? "bg-primary/20" : ""}`}>
                 {value.title}
-              </Link>
+              </NavLink>
             ))
           }
         </div>
