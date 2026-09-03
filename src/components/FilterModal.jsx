@@ -1,14 +1,15 @@
-import { useState } from 'react'
 import { categories } from '../constants/category'
-const FilterModal = ({ isModalOpen, setIsModalOpen, isDiscoutSelected, setIsDiscountSelected, toggleDiscount }) => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState("")
+const FilterModal = ({ isModalOpen, setIsModalOpen, isDiscoutSelected, toggleDiscount, selectedCategory, setSelectedCategory }) => {
 
-  const selectCategory = (id) => {
-    if (selectedCategoryId === id) {
-      return setSelectedCategoryId("")
+
+  const selectCategory = (name) => {
+    if (selectedCategory === name) {
+      return setSelectedCategory("")
     }
-    setSelectedCategoryId(id)
+    setSelectedCategory(name)
   }
+
+
 
   return (
     <div className={`${isModalOpen ? "block" : "hidden"} bg-black/20 h-screen fixed inset-0 z-50 flex justify-center items-center`}
@@ -25,10 +26,10 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, isDiscoutSelected, setIsDisc
               categories.map((item, index) => (
                 <div
                   key={index}
-                  className={` p-2 px-4 cursor-pointer rounded-lg ${selectedCategoryId === item.id ? "bg-primary text-white" : "bg-black/3"}`}
+                  className={` p-2 px-4 cursor-pointer rounded-lg ${selectedCategory === item.name.toLowerCase() ? "bg-primary text-white" : "bg-black/3"}`}
                   onClick={() => {
 
-                    selectCategory(item.id)
+                    selectCategory(item.name.toLowerCase())
                   }}
                 >
                   {item.name}

@@ -1,22 +1,28 @@
 import { FaRegHeart } from "react-icons/fa";
-import { Link } from "react-router-dom";
-const HomeProductCard = (props) => {
+import { Link, useNavigate } from "react-router-dom";
+const ProductCard = (props) => {
 
-  const { header, data, link } = props;
-
+  const { header = "", data = [], link = "" } = props;
+  const navigate = useNavigate()
   return (
-    <div className="mt-4 p-4">
+    <div className="mt-4 p-4 pb-10">
       <div className="flex justify-between items-center">
         <h1 className="border-l-4 border-primary pl-4 text-2xl">{header}</h1>
-        <Link className="underline">
-          {link.name}{" >>>"}
+        <Link to={`/product?type=${link.type}`} className="underline">
+          {link.name}{link.length > 0 ? " >>>" : ""}
         </Link>
       </div>
 
       <div className="grid grid-cols-5 gap-6">
         {
           data.map((item, index) => (
-            <div key={index} className="mt-10 shadow-xl cursor-pointer shadow-black/20 rounded-t-xl rounded-b-xl">
+            <div key={index} className="mt-10 shadow-xl cursor-pointer shadow-black/20 rounded-t-xl rounded-b-xl"
+              onClick={() => {
+                navigate(
+                  "/product-detail",
+                  { state: { item } }
+                )
+              }}>
               <img src={item.photoUrl} alt="" className="rounded-t-xl" />
               <div className="p-4">
                 <div className="flex justify-between border-b pb-2 border-slate-200">
@@ -64,4 +70,4 @@ const HomeProductCard = (props) => {
   )
 }
 
-export default HomeProductCard
+export default ProductCard

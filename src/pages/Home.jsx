@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Carousel from '../components/Carousel'
 import Banner from '../components/Banner'
-import HomeProductCard from '../components/HomeProductCard'
+import ProductCard from '../components/ProductCard'
 
-import { popularItems, saleItems } from '../constants/homeProducts'
+import { popularItems, saleItems } from '../constants/products'
 import BrowseByCategory from '../components/BrowseByCategory'
 const Home = () => {
   const dispatch = useDispatch()
@@ -14,7 +14,7 @@ const Home = () => {
     <div className="">
       <Carousel />
       <Banner />
-      <HomeProductCard
+      <ProductCard
         header={"Popular Items"}
         data={popularItems}
         link={{
@@ -22,7 +22,7 @@ const Home = () => {
           type: "allProduct"
         }}
       />
-      <HomeProductCard
+      <ProductCard
         header={"Sale Items"}
         data={saleItems}
         link={{

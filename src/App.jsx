@@ -7,6 +7,7 @@ import Cart from "./pages/Cart"
 import NotFound from './pages/NotFound'
 import Event from "./pages/Event"
 import Layout from "./layouts/Layout"
+import ProductDetails from "./pages/subpages/ProductDetails"
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/user" element={<User />} />
           <Route path="/cart" element={<Cart />} />
         </Route>
+        <Route path="/product-detail" element={<ProductDetails />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

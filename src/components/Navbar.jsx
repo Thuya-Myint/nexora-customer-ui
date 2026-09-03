@@ -58,9 +58,12 @@ const Navbar = () => {
                 </NavLink>
               ))
             }
-            <IoMdCart
-              className=' text-2xl cursor-pointer'
-            />
+            <div className="flex gap-1 ">
+              <IoMdCart
+                className=' text-2xl cursor-pointer'
+              />
+              <p className="text-red-400">0</p>
+            </div>
             <FaUserCircle
               className=' text-2xl cursor-pointer'
             />
@@ -84,9 +87,12 @@ const Navbar = () => {
               }}
             />
           </div>
-          <IoMdCart
-            className='text-2xl lg:hidden cursor-pointer'
-          />
+          <div>
+            <IoMdCart
+              className='text-2xl lg:hidden cursor-pointer'
+            />
+            <p className="text-red-400">0</p>
+          </div>
           <FaUserCircle
             className='text-2xl lg:hidden cursor-pointer'
           />
