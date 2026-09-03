@@ -18,7 +18,7 @@ const Navbar = () => {
   }
   const searchKeywordOnChange = (e) => setSearchKeyword(e.target.value)
   return (
-    <nav className="flex lg:flex-row flex-col items-center justify-between fixed w-screen bg-white z-999">
+    <nav className="flex lg:flex-row flex-col items-center justify-between fixed w-screen bg-white z-40">
 
 
       <div className=" flex justify-between w-full px-4 py-2">

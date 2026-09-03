@@ -16,7 +16,7 @@ export const categories = [
     name: "Electronic"
   },
   {
-    id: 2,
+    id: 5,
     name: "Education"
   },
 ]
