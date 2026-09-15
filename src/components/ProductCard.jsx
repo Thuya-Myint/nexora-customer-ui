@@ -23,7 +23,7 @@ const ProductCard = (props) => {
                   { state: { item } }
                 )
               }}>
-              <img src={item.photoUrl} alt="" className="rounded-t-xl" />
+              <img src={item.photoUrl[0]} alt="" className="rounded-t-xl" />
               <div className="p-4">
                 <div className="flex justify-between border-b pb-2 border-slate-200">
                   <p>{item.name}</p>
@@ -32,7 +32,7 @@ const ProductCard = (props) => {
                 <div>
                   <div className="flex  gap-2 pt-2">
                     {
-                      item.size.map((item, index) => (
+                      item?.sizes.map((item, index) => (
                         <p className="text-sm bg-slate-100 p-1 rounded-lg" key={index}>
                           {item}
                         </p>
@@ -42,7 +42,7 @@ const ProductCard = (props) => {
                   <div className="flex justify-between items-center pt-2">
                     <div className="flex gap-2 ">
                       {
-                        item.color.map((item, index) => (
+                        item?.variants.map((item, index) => (
                           <p
                             className="w-4 h-4 rounded-full shadow-lg shadow-black/50 cursor-pointer"
                             key={index}

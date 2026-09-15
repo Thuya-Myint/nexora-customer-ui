@@ -58,15 +58,16 @@ const Navbar = () => {
                 </NavLink>
               ))
             }
-            <div className="flex gap-1 ">
+            <Link to={"/cart"} className="flex gap-1 ">
               <IoMdCart
                 className=' text-2xl cursor-pointer'
               />
               <p className="text-red-400">0</p>
-            </div>
-            <FaUserCircle
-              className=' text-2xl cursor-pointer'
-            />
+            </Link>
+            <Link to={"/user"}>
+              <FaUserCircle
+                className=' text-2xl cursor-pointer'
+              /></Link>
           </div>
 
         </div>
@@ -87,15 +88,17 @@ const Navbar = () => {
               }}
             />
           </div>
-          <div>
+          <Link to="/cart">
             <IoMdCart
               className='text-2xl lg:hidden cursor-pointer'
             />
             <p className="text-red-400">0</p>
-          </div>
-          <FaUserCircle
-            className='text-2xl lg:hidden cursor-pointer'
-          />
+          </Link>
+          <Link to={"/user"}>
+            <FaUserCircle
+              className='text-2xl lg:hidden cursor-pointer'
+            />
+          </Link>
           <GiHamburgerMenu
             onClick={openHamburgerMenu}
             className='text-2xl lg:hidden cursor-pointer text-primary active:opacity-35 '
