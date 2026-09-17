@@ -1,0 +1,3 @@
+www.mongodb.com
+
+mongodb+srv://tm665464_db_user:ULp5Ey5IlH9F4GyT@sale-db.je2xyan.mongodb.net/sale

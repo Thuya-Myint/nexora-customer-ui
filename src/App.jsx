@@ -8,12 +8,14 @@ import NotFound from './pages/NotFound'
 import Event from "./pages/Event"
 import Layout from "./layouts/Layout"
 import ProductDetails from "./pages/subpages/ProductDetails"
+import Login from "./pages/Login"
 
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+
         <Route element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/product" element={<Product />} />
@@ -22,6 +24,7 @@ const App = () => {
           <Route path="/user" element={<User />} />
           <Route path="/cart" element={<Cart />} />
         </Route>
+        <Route path="/login" element={<Login />} />
         <Route path="/product-detail" element={<ProductDetails />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>

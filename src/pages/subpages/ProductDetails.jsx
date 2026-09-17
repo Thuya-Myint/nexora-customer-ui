@@ -7,6 +7,7 @@ const ProductDetails = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const selectedProduct = location.state?.item
+  const prevLink = location.state?.prevLink ?? ""
   const [selectedSize, setSelectedSize] = useState(selectedProduct && selectedProduct?.sizes[0])
   const [selectedVariant, setSelectedVariant] = useState(selectedProduct && selectedProduct?.variants[0])
 
@@ -16,7 +17,7 @@ const ProductDetails = () => {
     <div>
       <div className="flex items-center p-4 py-10 justify-between">
         <div className="flex gap-4 items-center  ">
-          <div className="bg-black/10 p-1 rounded-full text-2xl cursor-pointer" onClick={() => navigate("/product")}>
+          <div className="bg-black/10 p-1 rounded-full text-2xl cursor-pointer" onClick={() => navigate(prevLink)}>
             <IoMdArrowBack />
           </div>
           <p className="p-1 px-4 rounded-full text-white bg-primary">{`${selectedProduct.name} ${selectedProduct.id}`}</p>

@@ -2,7 +2,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 const ProductCard = (props) => {
 
-  const { header = "", data = [], link = "" } = props;
+  const { header = "", data = [], link = "", prevLink = "/product" } = props;
   const navigate = useNavigate()
   return (
     <div className="mt-4 p-4 pb-10">
@@ -20,7 +20,12 @@ const ProductCard = (props) => {
               onClick={() => {
                 navigate(
                   "/product-detail",
-                  { state: { item } }
+                  {
+                    state: {
+                      item,
+                      prevLink
+                    }
+                  }
                 )
               }}>
               <img src={item.photoUrl[0]} alt="" className="rounded-t-xl" />

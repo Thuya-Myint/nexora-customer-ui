@@ -17,6 +17,7 @@ const Home = () => {
       <ProductCard
         header={"Popular Items"}
         data={popularItems}
+        prevLink={"/"}
         link={{
           name: "All product Items",
           type: "allProduct"
@@ -25,6 +26,7 @@ const Home = () => {
       <ProductCard
         header={"Sale Items"}
         data={saleItems}
+        prevLink={"/"}
         link={{
           name: "All Sale Items",
           type: "saleItems"

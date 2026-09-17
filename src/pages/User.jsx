@@ -3,13 +3,20 @@ import { RxCaretRight } from "react-icons/rx"
 import ProductCard from "../components/ProductCard"
 import { popularItems } from "../constants/products"
 import { useRef } from "react"
+import { FaArrowRightToBracket } from "react-icons/fa6"
+import { useNavigate } from "react-router-dom"
 const User = () => {
 
   const userInfoRef = useRef(null)
   const deliverRef = useRef(null)
+  const navigate = useNavigate()
+
 
   const focusOnRef = (ref) => ref.current?.focus()
 
+  const logout = () => {
+    navigate("/login")
+  }
   return (
     <div className=" p-10 pl-20 ">
       <div className="flex justify-center ">
@@ -33,6 +40,10 @@ const User = () => {
               Shopping Preferences
             </h1>
             <p className="pl-8">Your Favourites</p>
+          </div>
+          <div className="flex items-center gap-4 w-full justify-center cursor-pointer bg-red-500 text-white p-2 rounded-lg" onClick={logout}>
+            Logout
+            <FaArrowRightToBracket className="text-xl" />
           </div>
         </div>
         <div className="flex flex-col  w-full pl-20  gap-8">
@@ -64,7 +75,9 @@ const User = () => {
         </h1>
         <ProductCard
           header={""}
+          fromUrl={"/user"}
           data={popularItems}
+          prevLink={"/user"}
         />
       </div>
     </div>
