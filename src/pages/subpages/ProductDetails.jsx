@@ -30,6 +30,9 @@ const ProductDetails = () => {
           <FaUserCircle className="text-2xl" />
         </div>
       </div>
+
+      {/* ---- */}
+
       <div className="flex gap-10 w-full justify-center">
         <div className=" gap-4 p-10 w-1/3">
           <img src={selectedProduct.photoUrl[0]} className=" rounded-xl" alt="" />

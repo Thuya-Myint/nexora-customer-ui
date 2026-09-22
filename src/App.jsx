@@ -9,7 +9,7 @@ import Event from "./pages/Event"
 import Layout from "./layouts/Layout"
 import ProductDetails from "./pages/subpages/ProductDetails"
 import Login from "./pages/Login"
-
+import ProductDetailsM from './pages/subpages/ProductDetailsM'
 
 const App = () => {
   return (
@@ -26,6 +26,7 @@ const App = () => {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/product-detail" element={<ProductDetails />} />
+        <Route path="/product-detail-m" element={<ProductDetailsM />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

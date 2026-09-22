@@ -5,8 +5,10 @@ import Carousel from '../components/Carousel'
 import Banner from '../components/Banner'
 import ProductCard from '../components/ProductCard'
 
-import { popularItems, saleItems } from '../constants/products'
+import { popularItems, saleItems, modifiedProduct } from '../constants/products'
 import BrowseByCategory from '../components/BrowseByCategory'
+import ProductCardM from '../components/ProductCardM'
+
 const Home = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.user)
@@ -14,24 +16,25 @@ const Home = () => {
     <div className="">
       <Carousel />
       <Banner />
-      <ProductCard
+      <ProductCardM
         header={"Popular Items"}
-        data={popularItems}
+        data={modifiedProduct}
         prevLink={"/"}
         link={{
           name: "All product Items",
           type: "allProduct"
         }}
       />
-      <ProductCard
+      <ProductCardM
         header={"Sale Items"}
-        data={saleItems}
+        data={modifiedProduct}
         prevLink={"/"}
         link={{
           name: "All Sale Items",
           type: "saleItems"
         }}
       />
+
       <BrowseByCategory
       />
     </div>
