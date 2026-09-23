@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { FaUserCircle } from "react-icons/fa"
 import { IoMdArrowBack, IoMdCart } from "react-icons/io"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -11,10 +11,19 @@ const ProductDetailsM = () => {
   const [selectedOptions, setSelectedOptions] = useState(
     selectedProduct.skus[0]?.options ?? {}
   )
-  //{
-  //color:white
-  // storage:128gb
-  //}
+  const selectedSku = useMemo(() => {
+    return selectedProduct.skus.find((sku) =>
+      Object.entries(selectedOptions).every(
+        ([key, value]) => sku.options[key] === value
+      ))
+  }, [selectedProduct.skus, selectedOptions])
+
+
+
+  const [quantity, setQuantity] = useState(1)
+
+  const canAddToCart = Boolean(selectedSku) && selectedSku.stock > 0;
+
   return (
     <div>
       <div className="flex items-center p-4 py-10 justify-between">
@@ -43,15 +52,15 @@ const ProductDetailsM = () => {
             }
           </div>
         </div>
-        <div className=" flex w-3/7 flex-col  justify-between">
-          <div className="flex flex-col gap-6">
+        <div className=" flex w-3/7 flex-col  ">
+          <div className="flex flex-col gap-2">
             <h1 className="text-2xl">{selectedProduct.name}</h1>
             <p>{selectedProduct?.description}</p>
             <div>
               {
                 Object.entries(selectedProduct.options).map(
                   ([optionName, values]) => (
-                    <div className="mt-4">
+                    <div key={optionName} className="mb-2">
                       <h1 className="capitalize text-xl mb-2">
                         {/* loop - 1
                         OptionName = color //object key
@@ -107,10 +116,82 @@ const ProductDetailsM = () => {
                 )
               }
             </div>
+            <div>
+
+              <div className=" flex gap-4 items-end">
+                {
+                  selectedSku ?
+                    <div className="Capitalize text-xl">
+                      Price
+                    </div> : ""
+                }
+                <div>
+                  {
+                    selectedSku ?
+                      selectedSku?.price?.sale ?
+                        <div className='relative w-fit'>
+                          <p className='absolute -top-3 right-0  text-xs line-through opacity-50'>{selectedSku?.price?.base}</p>
+                          <p className=''>${selectedSku?.price?.sale}</p>
+                        </div>
+                        :
+                        <div>
+                          <p className=''>${selectedSku?.price?.base}</p>
+                        </div> : ""
+                  }
+
+                </div>
+              </div>
+              {
+                selectedSku?.stock === 0 ?
+                  <div className=" text-red-500">
+                    out of stock
+                  </div>
+                  :
+                  selectedSku?.stock <= 5 &&
+                  <div className="flex gap-1">
+                    only <p className="text-red-500">{selectedSku?.stock}</p> in stock!
+                  </div>
+
+
+              }
+
+
+            </div>
 
           </div>
 
-          <button className="bg-primary text-white w-full p-2 rounded-xl cursor-pointer">Add to Cart</button>
+          {
+            canAddToCart ?
+
+              <div className="mt-2">
+                <div className="flex items-center gap-2">
+                  <div className="text-xl">Quantity</div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      className="w-6 h-6 flex justify-center items-center border-2 border-primary bg-primary cursor-pointer text-white rounded-full"
+                      onClick={() => setQuantity((prev) => prev + 1)}
+                      disabled={quantity === selectedSku.stock}
+                    >
+                      +
+                    </button>
+                    <div>{quantity}</div>
+                    <button
+                      className="w-6 h-6 flex justify-center items-center bg-white text-black border-2 border-primary cursor-pointer rounded-full"
+                      onClick={() => setQuantity((prev) => prev - 1)}
+                      disabled={quantity === 1}
+
+                    >
+                      -
+                    </button>
+                  </div>
+                </div>
+                <button className="bg-primary text-white w-full p-2 rounded-xl cursor-pointer mt-4">Add to Cart</button>
+              </div>
+
+
+              :
+              <div className="text-red-500">selected unit is not available!</div>
+          }
         </div>
       </div>
     </div>

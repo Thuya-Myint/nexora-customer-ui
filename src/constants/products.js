@@ -172,7 +172,7 @@ export const modifiedProduct = [
           base: 799,
           sale: 699
         },
-        stock: 18
+        stock: 15
       },
       {
         id: "IPH-17-w-256",
