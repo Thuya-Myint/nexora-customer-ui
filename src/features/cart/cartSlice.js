@@ -15,27 +15,14 @@ const cartSlice = createSlice({
         (item) => item.skuId === newItem.skuId
       );
 
-
       if (existingItem) {
         const stockExceeds = existingItem.quantity + newItem.quantity > newItem.stock
         if (stockExceeds) {
-
-          console.log("existingItemQty", existingItem.quantity)
-          console.log("item qty to be added", newItem.quantity)
-          console.log("-------")
-          console.log("item available to purchase", newItem.stock)
-
-
           const availableQty = newItem.stock - existingItem.quantity
-          // const alertQtyCount = newItem.stock - newItem.quantity <= 0 ? 0 : newItem.stock - newItem.quantity
-
           return alert(`only ${newItem.stock} in stock! You can add ${availableQty} more item!`)
         }
-        // console.log(`${existingItem.quantity + newItem.quantity}: ${newItem.stock}`)
-        // console.log("item exists")
         existingItem.quantity += newItem.quantity
       } else {
-        // console.log("new item ")
         state.items.push(newItem)
       }
     },
@@ -45,11 +32,17 @@ const cartSlice = createSlice({
       )
     },
     updateQuantity: (state, action) => {
-      const { id, quantity } = action.payload
+      const { id, quantity, stock } = action.payload
+      console.log("::", id, quantity, stock)
       const item = state.items.find(
         (item) => item.id === id
       )
       if (!item) return;
+
+      if (quantity > stock) {
+
+        return alert(`Only ${stock} in stock!`)
+      }
 
       if (quantity <= 0) {
         state.items = state.items.filter(

@@ -93,9 +93,7 @@ const Login = () => {
               <FaGoogle className="text-green-400" />
             </div>
             <p className="text-md flex gap-1">
-              <span className="text-yellow-300">Continue</span>
-              <span className="text-blue-400">with</span>
-              <span className="text-red-400">google</span>
+              forgot password?
             </p>
           </div>
           <div className="flex items-center gap-2">

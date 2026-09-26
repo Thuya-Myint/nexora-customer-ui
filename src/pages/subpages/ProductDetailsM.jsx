@@ -5,18 +5,22 @@ import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
 import { addToCart } from '../../features/cart/cartSlice'
 const ProductDetailsM = () => {
+
   const location = useLocation()
+  const selectedProduct = location.state?.item
+  //---------------------
+
   const navigate = useNavigate()
+  const prevLink = location.state?.prevLink ?? ""
+  //---------------------
+
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cart.items)
-
-  const selectedProduct = location.state?.item
-  const prevLink = location.state?.prevLink ?? ""
-
-
   const [selectedOptions, setSelectedOptions] = useState(
     selectedProduct.skus[0]?.options ?? {}
   )
+  //---------------------
+
   const selectedSku = useMemo(() => {
     return selectedProduct.skus.find((sku) =>
       Object.entries(selectedOptions).every(
@@ -24,23 +28,19 @@ const ProductDetailsM = () => {
       ))
   }, [selectedProduct.skus, selectedOptions])
 
+
   const [quantity, setQuantity] = useState(1)
 
-
-  useEffect(() => {
-    console.log("cart--item", cartItems)
-  }, [cartItems])
   const currentPrice = selectedSku?.price.sale ?? selectedSku?.price.base ?? null
 
-  const selectedProductInCart = cartItems.find((item) => item?.skuId === selectedSku?.id)
-  const currentProductQty = selectedProductInCart?.quantity || 0
-  // useEffect(() => {
-  //   console.log("selectedProductInCart", selectedProductInCart, "currentProductQty", currentProductQty)
-  // }, [quantity])
   const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0)
 
   const canAddToCart = Boolean(selectedSku) && selectedSku.stock > 0;
-  const stockAvailable = currentProductQty < selectedProductInCart?.stock;
+
+  // number ? -> null/undefined
+  // Boolean(number) -> ""/''/null/undefined
+
+
 
   const handleAddToCart = () => {
     if (!canAddToCart) return
@@ -66,7 +66,7 @@ const ProductDetailsM = () => {
           <p className="p-1 px-4 rounded-full text-white bg-primary">{`${selectedProduct?.name} ${selectedProduct?.id}`}</p>
         </div>
         <div className=" flex gap-4 items-center">
-          <div className="flex gap-1">
+          <div className="flex gap-1" onClick={() => navigate("/cart")}>
             <IoMdCart className="text-2xl" />
             <p className="text-red-400">{totalCartItems}</p>
           </div>
@@ -83,12 +83,12 @@ const ProductDetailsM = () => {
               ))
             }
           </div>
-          current qty{currentProductQty}
+
         </div>
         <div className=" flex w-3/7 flex-col  ">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl">{selectedProduct.name}</h1>
-            <p>{selectedProduct?.description}</p>
+            <p className="opacity-60">{selectedProduct?.description}</p>
             <div>
               {
                 Object.entries(selectedProduct.options).map(
@@ -193,37 +193,41 @@ const ProductDetailsM = () => {
 
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="text-xl">Quantity</div>
 
-            </div>
-            <div className="flex items-center gap-2">
-              <button
-                className="w-6 h-6 flex justify-center items-center border-2 border-primary bg-primary cursor-pointer text-white rounded-full"
-                onClick={() => setQuantity((prev) => prev + 1)}
-                disabled={quantity === selectedSku?.stock}
-              >
-                +
-              </button>
-              <div>{quantity}</div>
-              <button
-                className="w-6 h-6 flex justify-center items-center bg-white text-black border-2 border-primary cursor-pointer rounded-full"
-                onClick={() => setQuantity((prev) => prev - 1)}
-                disabled={quantity === 1}
-
-              >
-                -
-              </button>
-            </div>
-          </div>
           {
             canAddToCart ?
-              <button
-                className="bg-primary active:opacity-70 text-white w-full p-2 rounded-xl cursor-pointer mt-4"
-                onClick={handleAddToCart}
-              >Add to Cart
-              </button>
+
+              <div>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <div className="text-xl">Quantity</div>
+
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      className="w-6 h-6 flex justify-center items-center border-2 border-primary bg-primary cursor-pointer text-white rounded-full"
+                      onClick={() => setQuantity((prev) => prev + 1)}
+                      disabled={quantity === selectedSku?.stock}
+                    >
+                      +
+                    </button>
+                    <div>{quantity}</div>
+                    <button
+                      className="w-6 h-6 flex justify-center items-center bg-white text-black border-2 border-primary cursor-pointer rounded-full"
+                      onClick={() => setQuantity((prev) => prev - 1)}
+                      disabled={quantity === 1}
+
+                    >
+                      -
+                    </button>
+                  </div>
+                </div>
+                <button
+                  className="bg-primary active:opacity-70 text-white w-full p-2 rounded-xl cursor-pointer mt-4"
+                  onClick={handleAddToCart}
+                >Add to Cart
+                </button>
+              </div>
               :
               <div className="text-red-500">selected unit is not available!</div>
           }

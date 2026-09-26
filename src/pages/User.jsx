@@ -1,10 +1,10 @@
 import { FaStar, FaUserCircle } from "react-icons/fa"
 import { RxCaretRight } from "react-icons/rx"
-import ProductCard from "../components/ProductCard"
-import { popularItems } from "../constants/products"
+import { modifiedProduct } from "../constants/products"
 import { useRef } from "react"
 import { FaArrowRightToBracket } from "react-icons/fa6"
 import { useNavigate } from "react-router-dom"
+import ProductCardM from "../components/ProductCardM"
 const User = () => {
 
   const userInfoRef = useRef(null)
@@ -73,12 +73,13 @@ const User = () => {
           Your Favourites
           <FaStar className="text-primary" />
         </h1>
-        <ProductCard
+        <ProductCardM
           header={""}
           fromUrl={"/user"}
-          data={popularItems}
           prevLink={"/user"}
+          data={modifiedProduct}
         />
+
       </div>
     </div>
   )

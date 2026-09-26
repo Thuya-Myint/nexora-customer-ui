@@ -2,8 +2,8 @@ import { IoFilter, IoReloadCircle } from 'react-icons/io5'
 import FilterModal from '../components/FilterModal'
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import ProductCard from '../components/ProductCard'
-import { allProducts } from '../constants/products'
+import { modifiedProduct } from '../constants/products'
+import ProductCardM from '../components/ProductCardM'
 const Product = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate()
@@ -58,8 +58,10 @@ const Product = () => {
         setSelectedCategory={setSelectedCategory}
       />
 
-      <ProductCard
-        data={allProducts}
+      <ProductCardM
+
+        data={modifiedProduct}
+
       />
 
     </div >

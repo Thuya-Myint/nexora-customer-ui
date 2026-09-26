@@ -5,11 +5,14 @@ import { IoIosSearch, IoMdCart } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false)
   const searchInputRef = useRef(null)
   const [searchKeyword, setSearchKeyword] = useState("")
+  const cartItems = useSelector((state) => state.cart.items)
+  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0)
   const openHamburgerMenu = () => {
     setIsHamburgerMenuOpen(!isHamburgerMenuOpen)
     if (isHamburgerMenuOpen) {
@@ -62,7 +65,7 @@ const Navbar = () => {
               <IoMdCart
                 className=' text-2xl cursor-pointer'
               />
-              <p className="text-red-400">0</p>
+              <p className="text-red-400">{totalCartItems}</p>
             </Link>
             <Link to={"/user"}>
               <FaUserCircle
