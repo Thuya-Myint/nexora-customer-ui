@@ -31,7 +31,7 @@ const Carousel = () => {
                   <h1 className='text-2xl'>{item.title}</h1>
                   <div className='flex gap-2 items-center'>
                     <div>{item.description}</div>
-                    <Link to={item.quickLink} className="bg-white p-1 text-primary rounded-lg text-sm">
+                    <Link to={"/event"} className="bg-white p-1 text-primary rounded-lg text-sm">
                       {"detail >>>"}
                     </Link>
                   </div>

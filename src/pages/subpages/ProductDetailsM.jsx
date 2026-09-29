@@ -40,6 +40,9 @@ const ProductDetailsM = () => {
   // number ? -> null/undefined
   // Boolean(number) -> ""/''/null/undefined
 
+  useEffect(() => {
+    setQuantity(1)
+  }, [selectedOptions])
 
 
   const handleAddToCart = () => {
